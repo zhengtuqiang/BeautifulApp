@@ -26,7 +26,7 @@ import butterknife.BindView;
  * 发现精选页
  */
 
-public class FindChoiceFragment extends BaseFragment<FindChoicePresenter> implements
+public class FindChoiceFragment extends BaseFragment<FindChoiceContract.Presenter> implements
         FindChoiceContract.View, BaseQuickAdapter.OnItemClickListener,
         RefreshRecyclerView.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R.id.rv_content)
@@ -50,7 +50,7 @@ public class FindChoiceFragment extends BaseFragment<FindChoicePresenter> implem
     }
 
     @Override
-    protected FindChoicePresenter createPresenter() {
+    protected FindChoiceContract.Presenter createPresenter() {
         return new FindChoicePresenter();
     }
 
