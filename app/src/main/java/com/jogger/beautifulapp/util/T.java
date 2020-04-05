@@ -2,6 +2,7 @@ package com.jogger.beautifulapp.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.StringRes;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class T {
     }
 
     @SuppressLint("ShowToast")
-    public static void show(int str) {
+    public static void show(@StringRes int str) {
         if (toast == null) {
             toast = Toast.makeText(Util.getApp(),
                     str, Toast.LENGTH_SHORT);

@@ -1,6 +1,7 @@
 package com.jogger.beautifulapp.base;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
+import android.view.View;
 
 import com.jogger.beautifulapp.R;
 import com.jogger.beautifulapp.control.ActivityCollector;
@@ -53,6 +56,25 @@ public abstract class BaseActivity<T extends IPresenter> extends AppCompatActivi
         }
         init();
         loadData();
+    }
+
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        if ("FrameLayout".equals(name)) {
+            int count = attrs.getAttributeCount();
+            for (int i = 0; i < count; i++) {
+                String attributeName = attrs.getAttributeName(i);
+                String attributeValue = attrs.getAttributeValue(i);
+                if ("id".equals(attributeName)) {
+                    int id = Integer.parseInt(attributeValue.substring(1));
+                    String idVal = getResources().getResourceName(id);
+                    if ("android:id/content".equals(idVal)) {
+                        return new GrayFrameLayout(context, attrs);
+                    }
+                }
+            }
+        }
+        return super.onCreateView(name, context, attrs);
     }
 
     protected abstract T createPresenter();
